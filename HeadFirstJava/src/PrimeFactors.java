@@ -5,40 +5,44 @@ import java.util.*;
 public class PrimeFactors {
     public static void main(String[] args){
 
-        getPrimeFactors(1);
+        ArrayList<Integer> factors = getPrimeFactors(30);
+        for (int number : factors){
+            System.out.print(number + " ");
+        }
     }
 
-    public static void getPrimeFactors(int x){
+    public static ArrayList getPrimeFactors(int x){
 
+        ArrayList<Integer> primeFactors= new ArrayList<Integer>();
         int number = x;
-        boolean twoPrinted = false;
-        // Print the number of 2s that divide n
+        // Print the number of 2s that divide x
         while (x%2==0)
         {
-            if (!twoPrinted){
-                System.out.print(2 + " ");
-                twoPrinted = true;
+            if (!primeFactors.contains(2)){
+                primeFactors.add(2);
             }
             x /= 2;
         }
 
-        // n must be odd at this point.  So we can
+        // x must be odd at this point.  So we can
         // skip one element (Note i = i +2)
         for (int i = 3; i <= Math.sqrt(x); i+= 2)
         {
-            // While i divides n, print i and divide n
+            // While i divides n, print i and divide x
             while (x%i == 0)
             {
-                System.out.print(i + " ");
+                primeFactors.add(i);
                 x /= i;
             }
         }
 
-        // This condition is to handle the case whien
-        // n is a prime number greater than 2
-        if (x > 2)
-            System.out.print(x);
+        // This condition is to handle the case when
+        // x is a prime number greater than 2
+        if (x > 2) {
+            primeFactors.add(x);
+        }
 
+        return primeFactors;
     }
 
 }
